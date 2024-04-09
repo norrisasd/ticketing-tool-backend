@@ -1,0 +1,22 @@
+# Ignore Python virtual environment files
+venv/
+
+# Ignore Docker files
+.dockerignore
+
+# Ignore PostgreSQL data directory
+data/
+
+# Ignore editor and IDE files
+.vscode/
+.idea/
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore environment variables file
+.env
