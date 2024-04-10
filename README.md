@@ -8,7 +8,7 @@ The backend for the ticketing tool application
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Author](#Author)
+- [Author](#author)
 
 ## Getting Started
 

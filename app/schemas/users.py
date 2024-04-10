@@ -1,5 +1,13 @@
 """This module contains the User schema."""
+from enum import Enum
 from pydantic import BaseModel
+
+
+class UserRole(str, Enum):
+    """Represents a user role."""
+    ADMIN = "admin"
+    USER = "user"
+    AGENT = "agent"
 
 
 class Token(BaseModel):
@@ -18,6 +26,7 @@ class UserBase(BaseModel):
     username: str
     email: str | None = None
     full_name: str | None = None
+    role: UserRole = UserRole.USER
 
 
 class UserInDBBase(UserBase):

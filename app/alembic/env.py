@@ -6,7 +6,7 @@ from sqlalchemy import pool
 
 from alembic import context
 from app.config import Base
-from app.model import users
+from app.model import users, ticket_category, ticket_categories_user, tickets
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())

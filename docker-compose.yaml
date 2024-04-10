@@ -5,14 +5,12 @@ services:
       context: .
     restart: on-failure
     image: backend-fastapi
-    container_name: test-docker
+    container_name: backend-fastapi
     working_dir: /backend-fastapi
     volumes:
       - .:/backend-fastapi
     ports:
       - ${API_PORT}:8000
-
-
   db:
     image: postgres
     container_name: postgres
@@ -21,11 +19,10 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_HOST=localhost
     ports:
       - 5432:5432
-    expose:
-      - 5432
     volumes:
-      - ./data:/var/lib/postgresql/data
-  
+      - database:/var/lib/postgresql/data
+
+volumes:
+  database: {}

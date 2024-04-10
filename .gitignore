@@ -4,9 +4,6 @@ venv/
 # Ignore Docker files
 .dockerignore
 
-# Ignore PostgreSQL data directory
-data/
-
 # Ignore editor and IDE files
 .vscode/
 .idea/

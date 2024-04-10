@@ -3,7 +3,6 @@ FROM python:3.11.9-bullseye
 
 # Set the working directory in the container
 WORKDIR /backend-fastapi
-RUN ls -l
 # Copy the poetry.lock and pyproject.toml files to the container
 COPY poetry.lock pyproject.toml /backend-fastapi/
 COPY . /backend-fastapi
