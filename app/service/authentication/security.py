@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 from jose import jwt
 from passlib.context import CryptContext
 
-SECRET_KEY = "SECRET_KEY"
+SECRET_KEY = "be2a718af3ccfbff6f5d7200827866b42f293eb0ecc0b38fff4bc55fc52ab992"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

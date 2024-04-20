@@ -4,7 +4,7 @@ from fastapi.exceptions import RequestValidationError
 import uvicorn
 from app.model import users, tickets, ticket_category, ticket_categories_user
 from app.routes import users_route, ticket_category_route, ticket_route
-from app.utils.exception_handler import validation_exception_handler
+from app.utils import exception_handler
 from .config import engine
 
 
@@ -14,7 +14,12 @@ app = FastAPI(
 )
 
 """Exception handlers"""
-app.add_exception_handler(RequestValidationError, validation_exception_handler)
+app.add_exception_handler(RequestValidationError,
+                          exception_handler.validation_exception_handler)
+app.add_exception_handler(
+    Exception, exception_handler.server_error_exception_handler)
+app.add_exception_handler(RequestValidationError,
+                          exception_handler.http_exception_handler)
 
 # Create tables in the database
 users.Base.metadata.create_all(bind=engine)

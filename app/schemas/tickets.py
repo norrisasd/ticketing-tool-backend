@@ -26,6 +26,12 @@ class CreateTicket(TicketBase):
     pass
 
 
+class AssignTicket(BaseModel):
+    """Represents a ticket assignment request."""
+    id: int
+    assigned_to: int
+
+
 class TicketInDBBase(TicketBase):
     """
     Represents a ticket in the database.
