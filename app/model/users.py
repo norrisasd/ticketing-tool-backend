@@ -17,7 +17,6 @@ class User(TimeStamp, Base):
     hash_password = Column(String)
 
     categories = relationship("TicketCategoriesUser", back_populates="user")
-    tickets = relationship("Tickets", back_populates="user")
-    created_tickets = relationship("Tickets", back_populates="created_by")
-    assigned_tickets = relationship("Tickets", back_populates="assigned_to")
-    closed_tickets = relationship("Tickets", back_populates="closed_by")
+    # created_tickets = relationship("Tickets", back_populates="created_by")
+    # assigned_tickets = relationship("Tickets", back_populates="assigned_to")
+    # closed_tickets = relationship("Tickets", back_populates="closed_by")

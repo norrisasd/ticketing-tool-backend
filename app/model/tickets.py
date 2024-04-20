@@ -18,16 +18,19 @@ class Tickets(TimeStamp, Base):
 
     created_by_id = Column(Integer, ForeignKey("users.id"),
                            index=True, nullable=False)
-    created_by = relationship("User", back_populates="created_tickets")
+    created_by = relationship("User", foreign_keys=[
+                              created_by_id])
 
     assigned_to_id = Column(Integer, ForeignKey("users.id"),
                             index=True, nullable=True)
-    assigned_to = relationship("User", back_populates="assigned_tickets")
+    assigned_to = relationship("User", foreign_keys=[
+                               assigned_to_id])
 
-    closed_at = Column(String, index=True, nullable=False)
+    closed_at = Column(String, index=True, nullable=True)
     closed_by_id = Column(Integer, ForeignKey("users.id"),
                           index=True, nullable=True)
-    closed_by = relationship("User", back_populates="closed_tickets")
+    closed_by = relationship("User", foreign_keys=[
+                             closed_by_id])
 
     category_id = Column(Integer, ForeignKey(
         "ticket_categories.id"), index=True, nullable=False)
