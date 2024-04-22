@@ -12,6 +12,11 @@ class TicketCategoryCreate(TicketCategoryBase):
     pass
 
 
+class TicketCategoryResponse(BaseModel):
+    """Represents a ticket category response."""
+    categories: list[str]
+
+
 class TicketCategoryInDBBase(TicketCategoryBase):
     """
     Represents a ticket category in the database.

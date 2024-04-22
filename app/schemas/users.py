@@ -49,3 +49,9 @@ class CreateUser(UserBase):
 class UserInDB(UserBase):
     """Represents a user in the database."""
     hashed_password: str
+
+
+class UserLogin(BaseModel):
+    """Represents a user login request."""
+    username: str
+    password: str

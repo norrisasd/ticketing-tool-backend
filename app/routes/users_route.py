@@ -2,7 +2,6 @@
 from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from app.config import get_db
@@ -10,6 +9,7 @@ from app.service.authentication import auth, security
 from app.model.users import User
 from app.schemas import users
 from app.service import users as user_service
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
@@ -33,7 +33,7 @@ async def register(user_in: users.CreateUser, db: Session = Depends(get_db)):
 
 @router.post("/token")
 async def login_for_access_token(
-    form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)
+    form_data: users.UserLogin, db: Session = Depends(get_db)
 ) -> users.Token:
     """This function logs in a user and returns an access token."""
     user = auth.get_user(db, username=form_data.username)
@@ -48,7 +48,11 @@ async def login_for_access_token(
     access_token = security.create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
-    return users.Token(access_token=access_token, token_type="bearer")
+    content = {"status": status.HTTP_200_OK, "message": "Login successful"}
+    response = JSONResponse(content=content)
+    response.set_cookie(key="auth.session", value=access_token,
+                        httponly=True, secure=True, expires=1800)
+    return response
 
 
 @router.get("/conversation/")
