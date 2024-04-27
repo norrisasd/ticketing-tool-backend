@@ -37,6 +37,10 @@ async def assign_category(category_in: ticket_categories_user.CreateTicketCatego
     """
     Assign a category to a user.
     """
+    db_category = ticket_category_service.get_category_by_id(
+        category_in.category_id, db)
+    if db_category is None:
+        raise HTTPException(status_code=400, detail="Category does not exist")
     category = ticket_categories_user_service.assign_category(
         ticket=category_in, db=db)
     response = response_scheme.Response(

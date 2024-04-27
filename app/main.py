@@ -1,6 +1,7 @@
 """Main module for the FastAPI application"""
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from app.model import users, tickets, ticket_category, ticket_categories_user
 from app.routes import users_route, ticket_category_route, ticket_route
@@ -31,6 +32,21 @@ ticket_category.Base.metadata.create_all(bind=engine)
 app.include_router(users_route.router)
 app.include_router(ticket_category_route.router)
 app.include_router(ticket_route.router)
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def start() -> None:

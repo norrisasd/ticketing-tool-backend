@@ -17,6 +17,11 @@ def get_category_by_name(name: str, db: Session):
     return db.query(TicketCategories).filter(TicketCategories.name == name).first()
 
 
+def get_category_by_id(category_id: int, db: Session):
+    """This function retrieves a ticket category by id."""
+    return db.query(TicketCategories).filter(TicketCategories.id == category_id).first()
+
+
 def get_category_by_user(user_id: int, db: Session):
     """This function retrieves a ticket category by user id."""
     return db.query(TicketCategories).filter(TicketCategories.user_id == user_id).all()
