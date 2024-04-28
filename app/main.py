@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-from app.model import users, tickets, ticket_category, ticket_categories_user
+from app.model import users, tickets, ticket_category, ticket_categories_user, ticket_assigned, ticket_closer
 from app.routes import users_route, ticket_category_route, ticket_route
 from app.utils import exception_handler
 from .config import engine
@@ -27,6 +27,8 @@ users.Base.metadata.create_all(bind=engine)
 ticket_categories_user.Base.metadata.create_all(bind=engine)
 tickets.Base.metadata.create_all(bind=engine)
 ticket_category.Base.metadata.create_all(bind=engine)
+ticket_closer.Base.metadata.create_all(bind=engine)
+ticket_assigned.Base.metadata.create_all(bind=engine)
 
 # Include routers
 app.include_router(users_route.router)

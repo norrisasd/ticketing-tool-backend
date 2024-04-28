@@ -1,6 +1,7 @@
 """This module contains the user routes."""
 from datetime import timedelta
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.responses import JSONResponse
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -47,6 +48,9 @@ async def login_for_access_token(
     access_token = security.create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
+
     response = json_response.LoginResponse(
         status=status.HTTP_200_OK, message="Login successful", access_token=access_token, token_type="bearer")
+    response = JSONResponse(content=response.dict())
+    response.set_cookie(key="auth.session", value=access_token)
     return response
