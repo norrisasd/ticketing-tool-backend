@@ -54,3 +54,12 @@ async def login_for_access_token(
     response = JSONResponse(content=response.dict())
     response.set_cookie(key="auth.session", value=access_token)
     return response
+
+
+@router.get("/users", response_model=list[users.UserInDBBase])
+async def get_users(db: Session = Depends(get_db)):
+    """
+    Get all users.
+    """
+    all_users = user_service.get_users(db)
+    return all_users

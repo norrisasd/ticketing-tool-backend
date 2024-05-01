@@ -56,3 +56,12 @@ async def get_category_by_user(user_id: int, db: Session = Depends(get_db)):
     categories = ticket_categories_user_service.get_assigned_categories(
         user_id=user_id, db=db)
     return categories
+
+
+@router.get("/get-categories", dependencies=[Depends(auth.get_current_user)], response_model=list[ticket_category.TicketCategoryBase])
+async def get_categories(db: Session = Depends(get_db)):
+    """
+    Get all categories.
+    """
+    categories = ticket_category_service.get_categories(db)
+    return categories

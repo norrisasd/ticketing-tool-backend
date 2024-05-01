@@ -14,3 +14,8 @@ def register(user_in: users.CreateUser, db: Session):
     db.commit()
     db.refresh(user)
     return user
+
+
+def get_users(db: Session):
+    """This function returns all users."""
+    return db.query(User).all()

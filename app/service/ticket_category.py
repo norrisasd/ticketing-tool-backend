@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from app.model.ticket_category import TicketCategories
+
 from app.schemas import ticket_category
 
 
@@ -25,3 +26,8 @@ def get_category_by_id(category_id: int, db: Session):
 def get_category_by_user(user_id: int, db: Session):
     """This function retrieves a ticket category by user id."""
     return db.query(TicketCategories).filter(TicketCategories.user_id == user_id).all()
+
+
+def get_categories(db: Session):
+    """This function retrieves all ticket categories."""
+    return db.query(TicketCategories).all()

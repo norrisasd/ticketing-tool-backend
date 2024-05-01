@@ -25,3 +25,12 @@ def get_assigned_categories(user_id: int, db: Session) -> list[str]:
         TicketCategoriesUser.user_id == user_id).all()
     categories: list[str] = [category.name for category in db_categories]
     return categories
+
+
+def is_user_assigned_to_category(user_id: int, category_id: int, db: Session) -> bool:
+    """This function checks if a user is the assigner of a category."""
+    db_category_user = db.query(TicketCategoriesUser).filter(
+        TicketCategoriesUser.user_id == user_id, TicketCategoriesUser.category_id == category_id).first()
+    if db_category_user:
+        return True
+    return False
